@@ -23,4 +23,5 @@ lxml
 nltk
 jupyterlab-git
 nbresuse
+pathlib
 elyra
