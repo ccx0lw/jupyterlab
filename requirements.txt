@@ -23,4 +23,3 @@ lxml
 nltk
 jupyterlab-git
 nbresuse
-itkwidgets
