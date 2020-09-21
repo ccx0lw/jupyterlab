@@ -20,7 +20,7 @@ RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ pip -U && \
 
 COPY requirements.txt .
 RUN ([ -f requirements.txt ] && \
-      pip3 install --no-cache-dir -r requirements.txt)
+      pip install --no-cache-dir -r requirements.txt)
 
 # perl
 RUN curl -sL http://cpanmin.us | perl - App::cpanminus
