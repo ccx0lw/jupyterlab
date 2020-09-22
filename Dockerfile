@@ -61,4 +61,4 @@ COPY . .
 
 EXPOSE $PORT
 
-CMD ["sh", "-c", "sed -i \"s/#c.NotebookApp.password =.*/c.NotebookApp.password = '${PASSWORD}'/g\" jupyter_notebook_config.py && nohup iperl && jupyter lab --ip=0.0.0.0 --port=$PORT --config=jupyter_notebook_config.py --notebook-dir=/root --allow-root --NotebookApp.ResourceUseDisplay.track_cpu_percent=True --NotebookApp.ResourceUseDisplay.mem_limit=$MEM"]
+CMD ["sh", "-c", "sed -i \"s/#c.NotebookApp.password =.*/c.NotebookApp.password = '${PASSWORD}'/g\" jupyter_notebook_config.py && nohup iperl && jupyter lab --ip=0.0.0.0 --port=$PORT --config=jupyter_notebook_config.py --notebook-dir=/root --allow-root --NotebookApp.ResourceUseDisplay.track_cpu_percent=True"]
