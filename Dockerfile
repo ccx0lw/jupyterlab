@@ -55,6 +55,8 @@ RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel
 
 WORKDIR /$USER
 
+RUN jupyter notebook --generate-config
+
 COPY . .
 
 EXPOSE $PORT
