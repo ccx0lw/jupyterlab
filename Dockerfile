@@ -59,6 +59,8 @@ RUN jupyter notebook --generate-config
 
 COPY . .
 
+RUN rm -rf .idea && rm -rf jupyter_notebook_config.py.bak
+
 EXPOSE $PORT
 
 CMD ["sh", "-c", "sed -i \"s/#c.NotebookApp.password =.*/c.NotebookApp.password = '${PASSWORD}'/g\" jupyter_notebook_config.py && nohup iperl && jupyter lab --ip=0.0.0.0 --port=$PORT --config=jupyter_notebook_config.py --notebook-dir=/root --allow-root --NotebookApp.ResourceUseDisplay.track_cpu_percent=True"]
