@@ -63,4 +63,4 @@ RUN rm -rf .idea
 
 EXPOSE $PORT
 
-CMD ["sh", "-c", "sed -i \"s/#c.NotebookApp.password =.*/c.NotebookApp.password = '${PASSWORD}'/g\" ~/.jupyter/jupyter_notebook_config.py && nohup iperl && jupyter lab --ip=0.0.0.0 --port=$PORT --notebook-dir=/root --allow-root --NotebookApp.ResourceUseDisplay.track_cpu_percent=True"]
+CMD ["sh", "-c", "sed -i \"s/#c.NotebookApp.password =.*/c.NotebookApp.password = '${PASSWORD}'/g\" /home/.jupyter/jupyter_notebook_config.py && nohup iperl && jupyter lab --ip=0.0.0.0 --port=$PORT --notebook-dir=/root --allow-root --NotebookApp.ResourceUseDisplay.track_cpu_percent=True"]
