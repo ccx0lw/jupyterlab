@@ -58,7 +58,7 @@ WORKDIR /$USER
 RUN jupyter notebook --generate-config
 
 COPY . .
-COPY /home/.jupyter/ /root/.jupyter/
+
 RUN rm -rf .idea
 
 EXPOSE $PORT
