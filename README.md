@@ -7,7 +7,7 @@ docker build -f Dockerfile -t jupyterlab:alpine .
 
 # run
 ```dockerfile
-docker run -it -p 8888:8888 -v /usr/local/data/jupyterlab/:/root/jupyterlab --name jupyterlab jupyterlab:alpine
+docker run -it -p 8888:8888 -v /usr/local/data/jupyterlab/:/root/jupyterlab -v /etc/localtime:/etc/localtime -v /usr/local/data/.jupyter/:~/.jupyter/ --name jupyterlab loveismile/jupyterlab
 ```
 
 # password
