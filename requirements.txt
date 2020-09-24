@@ -25,3 +25,6 @@ jupyterlab-git
 nbresuse
 pathlib
 elyra
+ipyvuetify
+pandas
+traitlets
