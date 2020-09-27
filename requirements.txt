@@ -30,3 +30,4 @@ pandas
 traitlets
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
+jupyterlab-heroku
