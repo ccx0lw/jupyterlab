@@ -42,6 +42,7 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter nbextension enable --py --sys-prefix ipyvuetify && \
     jupyter labextension install jupyterlab-drawio @krassowski/jupyterlab-lsp jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @elyra/pipeline-editor-extension @jupyter-widgets/jupyterlab-manager jupyter-vuetify && \
     jupyter contrib nbextension install --user --skip-running-check && \
+    jupyter nbextensions_configurator enable --user && \
     jupyter labextension update --all
 
 RUN jupyter lab build --dev-build=False --minimize=True
