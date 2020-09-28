@@ -40,7 +40,7 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter nbextension enable --py nbresuse --sys-prefix && \
     jupyter serverextension enable elyra && \
     jupyter nbextension enable --py --sys-prefix ipyvuetify && \
-    jupyter labextension install jupyterlab-drawio @krassowski/jupyterlab-lsp jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @elyra/pipeline-editor-extension @jupyter-widgets/jupyterlab-manager jupyter-vuetify jupyterlab_filetree && \
+    jupyter labextension install jupyterlab-drawio @krassowski/jupyterlab-lsp jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @elyra/pipeline-editor-extension @jupyter-widgets/jupyterlab-manager jupyter-matplotlib jupyter-vuetify jupyterlab_filetree && \
     jupyter contrib nbextension install --user --skip-running-check && \
     jupyter nbextensions_configurator enable --user && \
     jupyter labextension update --all
