@@ -45,6 +45,8 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter contrib nbextension install --user --skip-running-check && \
     jupyter nbextensions_configurator enable --user && \
     jupyter labextension update --all
+    
+RUN pip install python-language-server[all]
 
 RUN jupyter lab build --dev-build=False --minimize=True
 
