@@ -27,6 +27,8 @@ pathlib
 elyra
 ipyvuetify
 pandas
+scipy
+numpy
 traitlets
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
