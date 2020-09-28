@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 USER $USER
 
-RUN BUILD='alpine-sdk linux-headers nodejs npm gcc g++ gfortran make cmake python3-dev freetype-dev musl-dev libpng-dev libxml2-dev libxslt-dev tar make curl build-base wget gnupg perl perl-dev tar zeromq zeromq-dev libffi-dev openssl-dev' && \
+RUN BUILD='alpine-sdk linux-headers nodejs npm gcc g++ gfortran make cmake python3-dev freetype-dev musl-dev libpng-dev libxml2-dev libxslt-dev tar make curl build-base wget gnupg perl perl-dev tar zeromq zeromq-dev libffi-dev openssl-dev jpeg-dev zlib-dev' && \
     apk update --no-cache && apk add --no-cache --virtual=build-deps ${BUILD}
 
 RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ pip -U && \
