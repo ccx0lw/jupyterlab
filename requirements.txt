@@ -31,4 +31,3 @@ traitlets
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
 markdown
-jupyter-lsp
