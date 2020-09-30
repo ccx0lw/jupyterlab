@@ -22,10 +22,10 @@ RUN apk add --no-cache bash bzip2-dev  --allow-untrusted ca-certificates ;\
 ENV CONDA_DIR /opt/conda
 ENV PATH $CONDA_DIR/bin:$PATH
 ENV CONTAINER_UID 1000
-ENV INSTALLER Miniconda2-latest-Linux-x86_64.sh
+ENV INSTALLER Miniconda3-latest-Linux-x86_64.sh
 RUN cd /tmp && \
     mkdir -p $CONDA_DIR && \
-    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    wget https://repo.continuum.io/miniconda/$INSTALLER && \
     echo $(wget --quiet -O - https://repo.continuum.io/miniconda/ \
     | grep -A3 $INSTALLER \
     | tail -n1 \
