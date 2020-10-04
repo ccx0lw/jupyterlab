@@ -87,7 +87,11 @@ RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
 WORKDIR /$USER
 
+COPY scripts /scripts
+
 ADD jupyter_notebook_config.py /etc/jupyter/
+
+RUN chmod -R 755 /scripts
 
 EXPOSE $PORT
 
