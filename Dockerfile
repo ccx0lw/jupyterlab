@@ -1,4 +1,4 @@
-FROM openjdk:14-alpine3.10
+FROM alpine:latest
 MAINTAINER ccx0lw <fcjava@163.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -79,9 +79,9 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         ijavascript && \
                                                         conda clean --all --yes
 
-RUN npm rebuild
+#RUN npm rebuild
 
-RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
+#RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
