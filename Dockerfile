@@ -1,94 +1,73 @@
-FROM alpine:latest
+FROM openjdk:14-alpine3.10
 MAINTAINER ccx0lw <fcjava@163.com>
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV PYTHONUNBUFFERED=1 \
+    USER=root \
+    HOME=/home/$USER \
+    PASSWORD=sha1:d7c0a1595529:921a6a436d60a77e91fdc01cc257b5ee6e9e3477 \
+    MEM=2147483648 \
+    PORT=8888
 
-# RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories
+USER $USER
 
-ENV LANG=C.UTF-8
+RUN BUILD='alpine-sdk linux-headers nodejs npm gcc g++ gfortran make cmake python3-dev freetype-dev musl-dev libpng-dev libxml2-dev libxslt-dev tar make curl build-base wget gnupg perl perl-dev tar zeromq zeromq-dev libffi-dev openssl-dev jpeg-dev zlib-dev' && \
+    apk update --no-cache && apk add --no-cache --virtual=build-deps ${BUILD}
 
-# Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
-RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
-    ALPINE_GLIBC_PACKAGE_VERSION="2.32-r0" && \
-    ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
-    echo \
-        "-----BEGIN PUBLIC KEY-----\
-        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZ2u1KJKUu/fW4A25y9m\
-        y70AGEa/J3Wi5ibNVGNn1gT1r0VfgeWd0pUybS4UmcHdiNzxJPgoWQhV2SSW1JYu\
-        tOqKZF5QSN6X937PTUpNBjUvLtTQ1ve1fp39uf/lEXPpFpOPL88LKnDBgbh7wkCp\
-        m2KzLVGChf83MS0ShL6G9EQIAUxLm99VpgRjwqTQ/KfzGtpke1wqws4au0Ab4qPY\
-        KXvMLSPLUp7cfulWvhmZSegr5AdhNw5KNizPqCJT8ZrGvgHypXyiFvvAH5YRtSsc\
-        Zvo9GI2e2MaZyo9/lvb+LbLEJZKEQckqRj4P26gmASrZEPStwc+yqy1ShHLA0j6m\
-        1QIDAQAB\
-        -----END PUBLIC KEY-----" | sed 's/   */\n/g' > "/etc/apk/keys/sgerrand.rsa.pub" && \
-    wget \
-        "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    apk add --no-cache \
-        "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    \
-    rm "/etc/apk/keys/sgerrand.rsa.pub" && \
-    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 "$LANG" || true && \
-    echo "export LANG=$LANG" > /etc/profile.d/locale.sh && \
-    \
-    apk del glibc-i18n && \
-    \
-    rm "/root/.wget-hsts" && \
-    apk del .build-dependencies && \
-    rm \
-        "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
+RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ pip -U && \
+    pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
+    /usr/bin/python3.7 -m pip install --upgrade pip
 
-RUN apk add bash
+COPY requirements.txt .
+RUN ([ -f requirements.txt ] && \
+      pip install --no-cache-dir -r requirements.txt)
 
-# 安装 conda
-ENV CONDA_DIR /opt/conda
-ENV PATH $CONDA_DIR/bin:$PATH
-ENV CONTAINER_UID 1000
-ENV INSTALLER Miniconda3-latest-Linux-x86_64.sh
-RUN cd /tmp && \
-    mkdir -p $CONDA_DIR && \
-    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    echo $(wget --quiet -O - https://repo.continuum.io/miniconda/ \
-    | grep -A3 $INSTALLER \
-    | tail -n1 \
-    | cut -d\> -f2 \
-    | cut -d\< -f1 ) $INSTALLER  && \
-    /bin/bash $INSTALLER -f -b -p $CONDA_DIR && \
-    rm $INSTALLER
+# perl
+RUN curl -sL http://cpanmin.us | perl - App::cpanminus
+RUN export ARCHFLAGS='-arch x86_64' && \
+    cpanm -n --mirror http://mirrors.163.com/cpan --mirror-only --build-args 'OTHERLDFLAGS=' ZMQ::LibZMQ3 Devel::IPerl PDL Moose MooseX::AbstractFactory MooseX::AbstractMethod MooseX::Storage Test::More
 
-# python3
-RUN conda install -y python=3 && \
-    conda update conda && \
-    conda clean --all --yes
+RUN curl -L https://github.com/SpencerPark/IJava/releases/download/v1.3.0/ijava-1.3.0.zip > ijava-kernel.zip
 
-# jupyterhub ...
-RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
-                                                        pytorch torchvision torchaudio torchtext \
-                                                        xeus-cling \
-                                                        ipywidgets beakerx \
-                                                        bash_kernel \
-                                                        nodejs \
-                                                        ijavascript && \
-                                                        conda clean --all --yes
+RUN mkdir ijava-kernel && \
+    unzip ijava-kernel.zip -d ijava-kernel && \
+    cd ijava-kernel && \
+    python3 install.py --sys-prefix
 
-#RUN npm rebuild
+RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
+    jupyter serverextension enable --py jupyterlab && \
+    jupyter serverextension enable --py nbresuse --sys-prefix && \
+    jupyter nbextension enable --py nbresuse --sys-prefix && \
+    jupyter serverextension enable elyra && \
+    jupyter nbextension enable --py --sys-prefix ipyvuetify && \
+    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @elyra/pipeline-editor-extension @jupyter-widgets/jupyterlab-manager jupyter-vuetify && \
+    jupyter contrib nbextension install --user --skip-running-check && \
+    jupyter nbextensions_configurator enable --user && \
+    jupyter labextension update --all
 
-#RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
+RUN jupyter lab build --dev-build=False --minimize=True
 
-RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
+# alpine图形
+RUN apk add --no-cache fontconfig ttf-dejavu
+RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so && \
+    ln -s /lib/libuuid.so.1 /usr/lib/libuuid.so.1 && \
+    ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
+ENV LD_LIBRARY_PATH /usr/lib
+
+# javascript
+RUN npm --unsafe-perm i -g ijavascript && \
+    ijsinstall --install=global
+
+RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
 
 WORKDIR /$USER
 
-ADD jupyter_notebook_config.py /etc/jupyter/
+RUN jupyter notebook --generate-config
+
+COPY . .
+
+RUN rm -rf .idea
 
 EXPOSE $PORT
 
-CMD ["init.sh"]
+CMD ["sh", "-c", "sed -i \"s/#[[:space:]]*c.NotebookApp.password =.*/c.NotebookApp.password = '${PASSWORD}'/g\" /home/.jupyter/jupyter_notebook_config.py && nohup iperl && jupyter lab --ip=0.0.0.0 --port=$PORT --notebook-dir=/root --allow-root --NotebookApp.ResourceUseDisplay.track_cpu_percent=True"]
