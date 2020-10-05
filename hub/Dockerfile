@@ -93,6 +93,8 @@ ADD jupyter_notebook_config.py /etc/jupyter/
 
 RUN chmod -R 755 /scripts
 
+RUN apk add useradd usermod sudo
+
 EXPOSE $PORT
 
 CMD ["/scripts/init.sh"]
