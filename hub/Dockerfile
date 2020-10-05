@@ -95,4 +95,4 @@ RUN chmod -R 755 /scripts
 
 EXPOSE $PORT
 
-CMD ["init.sh"]
+CMD ["/scripts/sys/init.sh"]
