@@ -86,7 +86,8 @@ WORKDIR /$USER
 
 COPY scripts /scripts
 
-ADD jupyter_notebook_config.py /etc/jupyter/
+ADD settings/jupyter_notebook_config.py /etc/jupyter/
+ADD settings/jupyterhub_config.py /etc/jupyterhub/
 
 RUN chmod -R 755 /scripts
 
