@@ -80,10 +80,6 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         ijavascript && \
                                                         conda clean --all --yes
 
-#RUN npm rebuild
-
-#RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
-
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
 WORKDIR /$USER
