@@ -46,7 +46,8 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
 
-RUN apk add bash
+RUN apk add --no-cache bash shadow sudo && \
+            addgroup sudo
 
 # 安装 conda
 ENV CONDA_DIR /opt/conda
@@ -82,7 +83,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
 #RUN npm rebuild
 
 #RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
-RUN apk add shadow sudo
+
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
 WORKDIR /$USER
