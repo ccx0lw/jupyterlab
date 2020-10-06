@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 file="/root/createusers.txt"
-cat $file
 
 if [ -f $file ]
   then
