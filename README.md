@@ -20,3 +20,19 @@ passwd()
 ```
 
 # other
+
+# jupyterhub
+
+# build
+```
+docker run -d  --restart unless-stopped \
+    --name jupyterhub \
+    --log-opt max-size=50m \
+    --memory=$(($(head -n 1 /proc/meminfo | awk '{print $2}') * 4 / 5))k \
+    --cpus=$(($(nproc) - 1)) \
+    -v %LOCAL_PATH_TO_HOMES%:/home \
+    -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
+    -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/startup.sh \
+    -p 8000:8000 \
+    loveismile/jupyterlab:hub
+```
