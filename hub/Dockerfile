@@ -86,7 +86,6 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
 # jupyter extension
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter serverextension enable --py jupyterlab && \
-    jupyter nbextension enable --py --sys-prefix ipyvuetify && \
     jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension update --all
     
