@@ -92,11 +92,6 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
 RUN npm --unsafe-perm i -g ijavascript && \
     ijsinstall --install=global
 
-# perl
-RUN curl -sL http://cpanmin.us | perl - App::cpanminus
-RUN export ARCHFLAGS='-arch x86_64' && \
-    cpanm -n --build-args 'OTHERLDFLAGS=' ZMQ::LibZMQ3 Devel::IPerl PDL Moose MooseX::AbstractFactory MooseX::AbstractMethod MooseX::Storage Test::More
-
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
 WORKDIR /$USER
