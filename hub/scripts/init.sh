@@ -42,7 +42,9 @@ cd /root
 
 if [ -f /etc/jupyterhub/jupyterhub_config.py ]
   then
-    jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+    nohup jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
   else
-    jupyterhub 
+    nohup jupyterhub 
 fi
+
+nohup iperl
