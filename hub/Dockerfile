@@ -83,8 +83,11 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         nodejs \
                                                         ijavascript && \
                                                         conda clean --all --yes
-                                                        
-RUN pip3 install jupyterhub-dummyauthenticator  
+RUN npm rebuild
+
+RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
+
+# RUN pip3 install jupyterhub-dummyauthenticator  
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
