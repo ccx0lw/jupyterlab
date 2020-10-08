@@ -86,6 +86,22 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
 
 # RUN pip3 install jupyterhub-dummyauthenticator  
 
+# jupyter extension
+RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
+    jupyter serverextension enable --py jupyterlab && \
+    jupyter serverextension enable --py nbresuse --sys-prefix && \
+    jupyter nbextension enable --py nbresuse --sys-prefix && \
+    jupyter serverextension enable elyra && \
+    jupyter nbextension enable --py --sys-prefix ipyvuetify && \
+    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @elyra/pipeline-editor-extension @jupyter-widgets/jupyterlab-manager jupyter-vuetify && \
+    jupyter contrib nbextension install --user --skip-running-check && \
+    jupyter nbextensions_configurator enable --user && \
+    jupyter labextension update --all
+    
+# javascript
+RUN npm --unsafe-perm i -g ijavascript && \
+    ijsinstall --install=global
+
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
 WORKDIR /$USER
