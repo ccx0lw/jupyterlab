@@ -3,8 +3,6 @@ MAINTAINER ccx0lw <fcjava@163.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories
-
 ENV LANG=C.UTF-8
 
 # Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
