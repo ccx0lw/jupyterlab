@@ -78,11 +78,12 @@ RUN conda install -y python=3 && \
 RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
-                                                        ipywidgets beakerx \
+                                                        ipywidgets beakerx ipyvuetify \
                                                         bash_kernel \
                                                         nodejs \
                                                         perl && \
                                                         conda clean --all --yes
+                                                        
 # jupyter extension
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter serverextension enable --py jupyterlab && \
