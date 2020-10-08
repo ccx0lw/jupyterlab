@@ -46,7 +46,7 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
 
-RUN apk add --no-cache bash shadow sudo linux-pam ca-certificates libintl gettext zeromq zeromq-dev && \
+RUN apk add --no-cache bash shadow sudo linux-pam ca-certificates libintl gettext && \
             update-ca-certificates && \
             ln -s /lib /lib64 && \
             addgroup sudo
@@ -81,11 +81,8 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         ipywidgets beakerx \
                                                         bash_kernel \
                                                         nodejs \
-                                                        ijavascript && \
+                                                        perl && \
                                                         conda clean --all --yes
-RUN npm rebuild
-
-RUN npm install -g --unsafe-perm ijavascript && ijsinstall --hide-undefined --install=global
 
 # RUN pip3 install jupyterhub-dummyauthenticator  
 
