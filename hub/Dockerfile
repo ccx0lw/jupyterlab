@@ -83,17 +83,11 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         nodejs \
                                                         perl && \
                                                         conda clean --all --yes
-
-RUN pip3 install nbresuse elyra ipyvuetify
-
 # jupyter extension
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter serverextension enable --py jupyterlab && \
-    jupyter serverextension enable --py nbresuse --sys-prefix && \
-    jupyter nbextension enable --py nbresuse --sys-prefix && \
-    jupyter serverextension enable elyra && \
     jupyter nbextension enable --py --sys-prefix ipyvuetify && \
-    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @elyra/pipeline-editor-extension @jupyter-widgets/jupyterlab-manager jupyter-vuetify && \
+    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension update --all
     
 # javascript
