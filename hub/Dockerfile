@@ -84,7 +84,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         perl && \
                                                         conda clean --all --yes
 
-# RUN pip3 install jupyterhub-dummyauthenticator  
+RUN pip3 install nbresuse elyra ipyvuetify
 
 # jupyter extension
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
