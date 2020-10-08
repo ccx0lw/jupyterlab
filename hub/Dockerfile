@@ -46,7 +46,7 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
 
-RUN apk add --no-cache bash shadow sudo linux-pam ca-certificates libintl gettext && \
+RUN apk add --no-cache bash shadow sudo curl linux-pam ca-certificates libintl gettext && \
             update-ca-certificates && \
             ln -s /lib /lib64 && \
             addgroup sudo
