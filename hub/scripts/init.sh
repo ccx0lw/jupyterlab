@@ -46,5 +46,3 @@ if [ -f /etc/jupyterhub/jupyterhub_config.py ]
   else
     nohup jupyterhub 
 fi
-
-nohup iperl
