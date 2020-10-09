@@ -67,13 +67,8 @@ RUN cd /tmp && \
     /bin/bash $INSTALLER -f -b -p $CONDA_DIR && \
     rm $INSTALLER
 
-# python3
-RUN conda install -y python=3 && \
-    conda update conda && \
-    conda clean --all --yes
-
 # jupyterhub ...
-RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
+RUN conda install -y python=3 -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
                                                         ipywidgets beakerx \
