@@ -67,8 +67,9 @@ RUN cd /tmp && \
     /bin/bash $INSTALLER -f -b -p $CONDA_DIR && \
     rm $INSTALLER
 
-# python3
+# python3 & perl
 RUN conda install -y python=3 && \
+    conda install -y perl-bioperl && \
     conda update conda && \
     conda clean --all --yes
 
@@ -78,8 +79,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         xeus-cling \
                                                         ipywidgets beakerx ipyvuetify \
                                                         bash_kernel \
-                                                        nodejs \
-                                                        -c biobuilds perl-bioperl && \
+                                                        nodejs && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
