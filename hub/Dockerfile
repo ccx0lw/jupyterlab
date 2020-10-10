@@ -73,13 +73,12 @@ RUN conda install -y python=3 && \
     conda clean --all --yes
 
 # jupyterhub ...
-RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
+RUN conda install -c biobuilds perl-bioperl -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
                                                         ipywidgets beakerx ipyvuetify \
                                                         bash_kernel \
-                                                        nodejs \
-                                                        perl && \
+                                                        nodejs && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
