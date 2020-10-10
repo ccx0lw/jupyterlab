@@ -67,20 +67,26 @@ RUN cd /tmp && \
     /bin/bash $INSTALLER -f -b -p $CONDA_DIR && \
     rm $INSTALLER
 
+# python3
+RUN conda install -y python=3 && \
+    conda update conda && \
+    conda clean --all --yes
+
 # jupyterhub ...
-RUN conda install -y python=3 -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
+RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
-                                                        ipywidgets beakerx \
+                                                        ipywidgets beakerx ipyvuetify \
                                                         bash_kernel \
-                                                        nodejs  \ 
-                                                        perl \
-                                                        ipyvuetify && \
+                                                        nodejs \
+                                                        perl && \
                                                         conda clean --all --yes
+                                                        
 # jupyter extension
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter serverextension enable --py jupyterlab && \
-    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-logout jupyterlab-theme-toggle jupyter-vuetify && \
+    jupyter nbextension enable --py --sys-prefix ipyvuetify && \
+    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension update --all
     
 # javascript
