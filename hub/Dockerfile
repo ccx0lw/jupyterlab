@@ -92,7 +92,7 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
 RUN npm --unsafe-perm i -g ijavascript && \
     ijsinstall --install=global
     
-RUN BUILD='alpine-sdk linux-headers nodejs npm gcc g++ gfortran make cmake python3-dev freetype-dev musl-dev libpng-dev libxml2-dev libxslt-dev tar make curl build-base wget gnupg perl perl-dev tar zeromq zeromq-dev libffi-dev openssl-dev jpeg-dev zlib-dev' && \
+RUN BUILD='alpine-sdk linux-headers gcc g++ gfortran make cmake freetype-dev musl-dev libpng-dev libxml2-dev libxslt-dev tar make curl build-base wget gnupg perl perl-dev tar zeromq zeromq-dev libffi-dev jpeg-dev zlib-dev' && \
     apk update --no-cache && apk add --no-cache --virtual=build-deps ${BUILD}
     
 # perl
