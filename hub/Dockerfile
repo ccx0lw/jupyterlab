@@ -76,7 +76,7 @@ RUN conda install -y python=3 && \
 RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
-                                                        ipywidgets beakerx_kernel_groovy beakerx_kernel_scala beakerx_kernel_clojure beakerx_kernel_kotlin \
+                                                        ipywidgets beakerx \
                                                         bash_kernel \
                                                         nodejs go \ 
                                                         elyra && \
