@@ -69,7 +69,7 @@ RUN cd /tmp && \
 
 # python3 & perl
 RUN conda install -y python=3 && \
-    conda install -c biobuilds perl-bioperl && \
+    conda install -c anaconda perl && \
     conda update conda && \
     conda clean --all --yes
 
