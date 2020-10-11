@@ -78,7 +78,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         xeus-cling \
                                                         ipywidgets beakerx_kernel_groovy beakerx_kernel_scala beakerx_kernel_clojure beakerx_kernel_kotlin \
                                                         bash_kernel \
-                                                        nodejs \ 
+                                                        nodejs go \ 
                                                         elyra && \
                                                         conda clean --all --yes
                                                         
