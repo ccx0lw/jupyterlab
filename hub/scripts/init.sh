@@ -40,6 +40,8 @@ mkdir -p ~/.local/share/jupyter/runtime
 
 cd /root
 
+nohup iperl
+
 if [ -f /etc/jupyterhub/jupyterhub_config.py ]
   then
     nohup jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
