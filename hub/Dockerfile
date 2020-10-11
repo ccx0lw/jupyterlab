@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM openjdk:14-alpine3.10
 MAINTAINER ccx0lw <fcjava@163.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -69,7 +69,6 @@ RUN cd /tmp && \
 
 # python3 & perl
 RUN conda install -y python=3 && \
-    conda install -c anaconda perl && \
     conda update conda && \
     conda clean --all --yes
 
@@ -77,7 +76,7 @@ RUN conda install -y python=3 && \
 RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
-                                                        ipywidgets beakerx \
+                                                        ipywidgets beakerx_kernel_groovy beakerx_kernel_scala beakerx_kernel_clojure beakerx_kernel_kotlin \
                                                         bash_kernel \
                                                         nodejs \ 
                                                         elyra && \
@@ -92,6 +91,22 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
 # javascript
 RUN npm --unsafe-perm i -g ijavascript && \
     ijsinstall --install=global
+    
+RUN BUILD='alpine-sdk linux-headers nodejs npm gcc g++ gfortran make cmake python3-dev freetype-dev musl-dev libpng-dev libxml2-dev libxslt-dev tar make curl build-base wget gnupg perl perl-dev tar zeromq zeromq-dev libffi-dev openssl-dev jpeg-dev zlib-dev' && \
+    apk update --no-cache && apk add --no-cache --virtual=build-deps ${BUILD}
+    
+# perl
+RUN curl -sL http://cpanmin.us | perl - App::cpanminus
+RUN export ARCHFLAGS='-arch x86_64' && \
+    cpanm -n --mirror http://mirrors.163.com/cpan --mirror-only --build-args 'OTHERLDFLAGS=' ZMQ::LibZMQ3 Devel::IPerl PDL Moose MooseX::AbstractFactory MooseX::AbstractMethod MooseX::Storage Test::More
+
+# java
+RUN curl -L https://github.com/SpencerPark/IJava/releases/download/v1.3.0/ijava-1.3.0.zip > ijava-kernel.zip
+
+RUN mkdir ijava-kernel && \
+    unzip ijava-kernel.zip -d ijava-kernel && \
+    cd ijava-kernel && \
+    python3 install.py --sys-prefix
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
 
