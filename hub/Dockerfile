@@ -108,7 +108,7 @@ RUN mkdir ijava-kernel && \
     cd ijava-kernel && \
     python3 install.py --sys-prefix
 
-RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache
+RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
 
 WORKDIR /$USER
 
