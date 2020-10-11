@@ -67,7 +67,7 @@ RUN cd /tmp && \
     /bin/bash $INSTALLER -f -b -p $CONDA_DIR && \
     rm $INSTALLER
 
-# python3 & perl
+# python3
 RUN conda install -y python=3 && \
     conda update conda && \
     conda clean --all --yes
