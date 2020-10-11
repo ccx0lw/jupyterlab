@@ -79,13 +79,14 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         xeus-cling \
                                                         ipywidgets beakerx \
                                                         bash_kernel \
-                                                        nodejs && \
+                                                        nodejs \ 
+                                                        elyra && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter serverextension enable --py jupyterlab && \
-    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager && \
+    jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager @elyra/pipeline-editor-extension && \
     jupyter labextension update --all
     
 # javascript
