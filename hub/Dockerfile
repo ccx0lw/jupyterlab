@@ -110,6 +110,14 @@ RUN mkdir ijava-kernel && \
     cd ijava-kernel && \
     python3 install.py --sys-prefix
     
+# go
+RUN go get -u github.com/gopherdata/gophernotes && \ 
+    cd ~/go/src/github.com/gopherdata/gophernotes && \
+    GOPATH=~/go GO111MODULE=on go install . && \
+    cp ~/go/bin/gophernotes /usr/local/bin/ && \
+    mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
+    cp -r./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
+    
 RUN pip3 install --upgrade --force jupyter-console jupyterlab-git
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
