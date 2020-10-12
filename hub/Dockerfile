@@ -118,8 +118,8 @@ RUN go get -u github.com/gopherdata/gophernotes && \
     mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
     cp -r./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
 
-# redis lua
-RUN pip3 install redis_kernel ilua
+# lua
+RUN pip3 install ilua
 
 # ruby
 RUN gem install cztop rbczmq ffi_rzmq && \
