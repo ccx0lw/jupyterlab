@@ -120,6 +120,11 @@ RUN go get -u github.com/gopherdata/gophernotes && \
 
 # redis lua
 RUN pip3 install redis_kernel ilua
+
+# ruby
+RUN gem install cztop rbczmq ffi_rzmq && \
+    gem install iruby && \
+    iruby register --force
     
 RUN pip3 install --upgrade --force jupyter-console jupyterlab-git
 
