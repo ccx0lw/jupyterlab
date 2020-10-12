@@ -108,7 +108,7 @@ RUN mkdir ijava-kernel && \
     cd ijava-kernel && \
     python3 install.py --sys-prefix
     
-RUN pip3 install --upgrade --force jupyter-console
+RUN pip3 install --upgrade --force jupyter-console jupyterlab-git
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
 
