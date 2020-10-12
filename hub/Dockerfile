@@ -116,7 +116,7 @@ RUN go get -u github.com/gopherdata/gophernotes && \
     GOPATH=~/go GO111MODULE=on go install . && \
     cp ~/go/bin/gophernotes /usr/local/bin/ && \
     mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
-    cp -r./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
+    cp -r ./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
 
 # lua
 RUN pip3 install ilua
