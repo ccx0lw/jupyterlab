@@ -117,6 +117,9 @@ RUN go get -u github.com/gopherdata/gophernotes && \
     cp ~/go/bin/gophernotes /usr/local/bin/ && \
     mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
     cp -r./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
+
+# redis
+RUN pip3 install redis_kernel
     
 RUN pip3 install --upgrade --force jupyter-console jupyterlab-git
 
