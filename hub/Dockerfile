@@ -79,7 +79,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         ipywidgets \
                                                         bash_kernel \
                                                         nodejs go \ 
-                                                        elyra jupyter-console jupyterlab-git && \
+                                                        elyra jupyter-console jupyterlab-git prompt-toolkit && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
