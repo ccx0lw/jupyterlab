@@ -72,7 +72,7 @@ RUN conda install -y python=3 && \
     conda update conda && \
     conda clean --all --yes
 
-# jupyterhub ...
+# jupyterhub ... 
 RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
