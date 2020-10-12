@@ -79,7 +79,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab no
                                                         ipywidgets \
                                                         bash_kernel \
                                                         nodejs go \ 
-                                                        elyra && \
+                                                        elyra jupyter-console jupyterlab-git && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
@@ -107,8 +107,6 @@ RUN mkdir ijava-kernel && \
     unzip ijava-kernel.zip -d ijava-kernel && \
     cd ijava-kernel && \
     python3 install.py --sys-prefix
-    
-RUN pip install jupyter-console && pip install --upgrade jupyterlab-git
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
 
