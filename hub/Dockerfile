@@ -76,7 +76,7 @@ RUN conda install -y python=3 && \
 RUN conda install -c conda-forge -c pytorch -c krinsman jupyterhub jupyterlab notebook nbgitpuller matplotlib tensorflow \
                                                         pytorch torchvision torchaudio torchtext \
                                                         xeus-cling \
-                                                        ipywidgets beakerx \
+                                                        ipywidgets \
                                                         bash_kernel \
                                                         nodejs go \ 
                                                         elyra && \
@@ -107,6 +107,8 @@ RUN mkdir ijava-kernel && \
     unzip ijava-kernel.zip -d ijava-kernel && \
     cd ijava-kernel && \
     python3 install.py --sys-prefix
+    
+RUN pip install --upgrade jupyterlab-git
 
 RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
 
