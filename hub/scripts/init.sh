@@ -48,3 +48,5 @@ if [ -f /etc/jupyterhub/jupyterhub_config.py ]
   else
     nohup jupyterhub 
 fi
+
+cp -r $(jupyter --data-dir)/kernels* /usr/local/share/jupyter/kernels/
