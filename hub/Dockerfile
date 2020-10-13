@@ -111,7 +111,8 @@ RUN mkdir ijava-kernel && \
     python3 install.py --sys-prefix
     
 # install gophernotes
-RUN go get golang.org/x/tools/cmd/goimports \
+RUN conda install -c anaconda gcc_linux-64 \ 
+ && go get golang.org/x/tools/cmd/goimports \
  && go get -tags zmq_4_x github.com/gophergala2016/gophernotes \
  && mkdir -p ~/.ipython/kernels/gophernotes \
  && cp -r $GOPATH/src/github.com/gophergala2016/gophernotes/kernel/* ~/.ipython/kernels/gophernotes
