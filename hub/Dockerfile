@@ -112,6 +112,7 @@ RUN mkdir ijava-kernel && \
     
 # install gophernotes
 RUN conda install -c anaconda gcc_linux-64 \ 
+ && ln -sf $(which gcc) x86_64-conda-linux-gnu-cc \
  && go get golang.org/x/tools/cmd/goimports \
  && go get -tags zmq_4_x github.com/gophergala2016/gophernotes \
  && mkdir -p ~/.ipython/kernels/gophernotes \
