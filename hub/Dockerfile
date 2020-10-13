@@ -111,7 +111,8 @@ RUN mkdir ijava-kernel && \
     python3 install.py --sys-prefix
     
 # go
-RUN go get -u github.com/gopherdata/gophernotes && \ 
+RUN conda install -c anaconda gxx_linux-64 && \
+    go get -u github.com/gopherdata/gophernotes && \ 
     cd ~/go/src/github.com/gopherdata/gophernotes && \
     GOPATH=~/go GO111MODULE=on go install . && \
     cp ~/go/bin/gophernotes /usr/local/bin/ && \
