@@ -110,13 +110,17 @@ RUN mkdir ijava-kernel && \
     cd ijava-kernel && \
     python3 install.py --sys-prefix
     
-# install gophernotes
-RUN conda install -c anaconda gcc_linux-64 \ 
- && ln -sf $(which gcc) x86_64-conda-linux-gnu-cc \
- && go get golang.org/x/tools/cmd/goimports \
- && go get -tags zmq_4_x github.com/gophergala2016/gophernotes \
- && mkdir -p ~/.ipython/kernels/gophernotes \
- && cp -r $GOPATH/src/github.com/gophergala2016/gophernotes/kernel/* ~/.ipython/kernels/gophernotes
+# go
+RUN GO111MODULE=off go get -d -u github.com/gopherdata/gophernotes
+
+RUN cd "$(go env GOPATH)"/src/github.com/gopherdata/gophernotes && \
+    env GO111MODULE=on go install
+
+RUN cd "$(go env GOPATH)"/src/github.com/gopherdata/gophernotes && \
+    mkdir -p ~/.local/share/jupyter/kernels/gophernotes && \
+    cp -r ./kernel/* ~/.local/share/jupyter/kernels/gophernotes && \
+    cd ~/.local/share/jupyter/kernels/gophernotes && \
+    sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
 
 # lua
 RUN pip3 install ilua
