@@ -111,9 +111,13 @@ RUN mkdir ijava-kernel && \
     python3 install.py --sys-prefix
     
 # go
-RUN go get github.com/takluyver/igo && \
-    mkdir -p ~/.jupyter/kernels/igo && \
-    cp -r $GOPATH/src/github.com/takluyver/igo/kernel/* ~/.jupyter/kernels/igo
+RUN cp /opt/conda/bin/x86_64-conda_cos6-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc && \ 
+    go get -u github.com/gopherdata/gophernotes && \ 
+    cd ~/go/src/github.com/gopherdata/gophernotes && \
+    GOPATH=~/go GO111MODULE=on go install . && \
+    cp ~/go/bin/gophernotes /usr/local/bin/ && \
+    mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
+    cp -r ./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
 
 # lua
 RUN pip3 install ilua
