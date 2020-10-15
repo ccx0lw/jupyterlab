@@ -111,6 +111,9 @@ RUN mkdir ijava-kernel && \
     python3 install.py --sys-prefix
     
 # go
+RUN go get github.com/takluyver/igo && \
+    mkdir -p ~/.jupyter/kernels/igo && \
+    cp -r $GOPATH/src/github.com/takluyver/igo/kernel/* ~/.jupyter/kernels/igo
 
 # lua
 RUN pip3 install ilua
