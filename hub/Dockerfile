@@ -116,7 +116,7 @@ RUN mkdir ijava-kernel && \
 RUN pip3 install ilua
 
 # ruby
-RUN gem install cztop rbczmq ffi_rzmq && \
+RUN gem install cztop rbczmq && \
     gem install iruby && \
     iruby register --force
     
