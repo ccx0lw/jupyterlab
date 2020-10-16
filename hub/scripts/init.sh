@@ -42,9 +42,9 @@ cd /root
 
 nohup iperl
 
-file="$(jupyter --data-dir)/kernels/iperl"
+iperldir="$(jupyter --data-dir)/kernels/iperl"
 
-until [[ -d $file ]]
+until [[ -d iperldir ]]
 do
     echo "iperl not exists ......."
     sleep 3
