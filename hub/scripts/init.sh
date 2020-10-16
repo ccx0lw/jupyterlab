@@ -44,7 +44,7 @@ nohup iperl
 
 iperldir="$(jupyter --data-dir)/kernels/iperl"
 
-until [[ -d iperldir ]]
+until [[ -d $iperldir ]]
 do
     echo "iperl not exists ......."
     sleep 3
