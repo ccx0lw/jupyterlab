@@ -42,12 +42,20 @@ cd /root
 
 nohup iperl
 
+
+file="$(jupyter --data-dir)/kernels/iperl"
+
+until [[ -d $file ]]
+do
+    echo "iperl not exists ......."
+    sleep 3
+done
+
+cp -r $(jupyter --data-dir)/kernels/* /usr/local/share/jupyter/kernels/
+
 if [ -f /etc/jupyterhub/jupyterhub_config.py ]
   then
     nohup jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
   else
     nohup jupyterhub 
 fi
-
-sleep 20
-cp -r $(jupyter --data-dir)/kernels/* /usr/local/share/jupyter/kernels/
