@@ -42,7 +42,6 @@ cd /root
 
 nohup iperl
 
-
 file="$(jupyter --data-dir)/kernels/iperl"
 
 until [[ -d $file ]]
@@ -55,7 +54,7 @@ cp -r $(jupyter --data-dir)/kernels/* /usr/local/share/jupyter/kernels/
 
 if [ -f /etc/jupyterhub/jupyterhub_config.py ]
   then
-    nohup jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+    jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
   else
-    nohup jupyterhub 
+    jupyterhub 
 fi
