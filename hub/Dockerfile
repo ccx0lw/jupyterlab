@@ -82,6 +82,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
                                                         elyra jupyter_console jupyterlab-git prompt-toolkit \
                                                         beakerx_kernel_groovy beakerx_kernel_kotlin beakerx_kernel_clojure beakerx_kernel_scala \
                                                         lua ruby && \
+                                                        voila ipyvuetify bqplot && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
