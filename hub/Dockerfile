@@ -93,6 +93,8 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager @elyra/pipeline-editor-extension jupyter-vuetify && \
     jupyter labextension update --all
     
+RUN pip install markdown
+    
 # javascript
 RUN npm --unsafe-perm i -g ijavascript && \
     ijsinstall --install=global
