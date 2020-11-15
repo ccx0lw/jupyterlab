@@ -83,7 +83,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
                                                         elyra jupyter_console jupyterlab-git prompt-toolkit \
 #                                                         beakerx_kernel_groovy beakerx_kernel_kotlin beakerx_kernel_clojure beakerx_kernel_scala \
                                                         lua ruby \
-                                                        voila ipyvuetify bqplot && \
+                                                        voila ipyvuetify bqplot voila-vuetify && \
                                                         conda clean --all --yes
                                                         
 # jupyter extension
@@ -93,7 +93,7 @@ RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager @elyra/pipeline-editor-extension jupyter-vuetify && \
     jupyter labextension update --all
     
-RUN pip install markdown
+RUN pip install markdown bqplot ipyvuetify voila-vuetify
     
 # javascript
 RUN npm --unsafe-perm i -g ijavascript && \
