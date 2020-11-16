@@ -90,6 +90,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
     jupyter serverextension enable --py jupyterlab && \
     jupyter nbextension enable --py --sys-prefix ipyvuetify && \
+    jupyter nbextension enable --py --sys-prefix bqplot && \
     jupyter labextension install jupyterlab-drawio jupyterlab-topbar-extension jupyterlab-logout jupyterlab-theme-toggle @jupyterlab/toc @jupyter-widgets/jupyterlab-manager @elyra/pipeline-editor-extension jupyter-vuetify && \
     jupyter labextension update --all
     
