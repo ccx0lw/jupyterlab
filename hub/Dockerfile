@@ -146,6 +146,8 @@ ADD settings/jupyterhub_config.py /etc/jupyterhub/
 
 RUN chmod -R 755 /scripts
 
+RUN pip install voila-vuetify
+
 EXPOSE 8000 8866
 
 CMD ["/scripts/init.sh"]
