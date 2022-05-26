@@ -47,7 +47,7 @@ iperldir="$(jupyter --data-dir)/kernels/iperl"
 until [[ -d $iperldir ]]
 do
     echo "iperl not exists ......."
-    sleep 10
+    sleep 3
 done
 
 cp -r $(jupyter --data-dir)/kernels/* /opt/conda/share/jupyter/kernels/
