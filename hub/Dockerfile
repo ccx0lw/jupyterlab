@@ -114,7 +114,7 @@ RUN curl -L https://github.com/SpencerPark/IJava/releases/download/v1.3.0/ijava-
 RUN mkdir ijava-kernel && \
     unzip ijava-kernel.zip -d ijava-kernel && \
     cd ijava-kernel && \
-    python3 install.py --sys-prefix
+    python3 install.py --sys-prefix 
     
 # go
 RUN cp /opt/conda/bin/x86_64-conda_cos6-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc && \ 
@@ -135,7 +135,7 @@ RUN gem install cztop rbczmq && \
     
 RUN pip3 install --upgrade --force jupyter-console jupyterlab-git
 
-RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip
+RUN rm -rf /tmp/* /var/cache/apk/* && rm -rf /root/.cache && rm -rf ijava-kernel.zip && rm -rf ijava-kernel
 
 WORKDIR /$USER
 
