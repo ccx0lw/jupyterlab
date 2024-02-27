@@ -1,5 +1,5 @@
 FROM openjdk:14-alpine3.10
-MAINTAINER ccx0lw <fcjava@163.com>
+MAINTAINER ccx0lw 
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV PYTHONUNBUFFERED=1 \
